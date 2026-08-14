@@ -18,9 +18,12 @@
 
 <!-- favicon: the magenta sweep off the cover, arcing through a concrete tile
      with a black corner block. Bottom-left corner: R=16 cut with G2
-     (curvature-continuous) smoothing — cubic ease → arc → cubic ease,
-     so the straight edges flow into the curve with no tangent break. -->
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><clipPath id='t'><path d='M0 0H100V100H25.6C16.64 100 12.16 100 8.74 98.26A16 16 0 0 1 1.74 91.26C0 87.84 0 83.36 0 74.4Z'/></clipPath></defs><g clip-path='url(%23t)'><rect width='100' height='100' fill='%23c9c9c5'/><circle cx='100' cy='0' r='85' fill='%23ec0a6e'/><circle cx='100' cy='0' r='52' fill='%23c9c9c5'/><rect width='16' height='16' fill='%23101010'/></g></svg>">
+     (curvature-continuous) smoothing — cubic ease → arc → cubic ease.
+     Served as versioned files (bump ?v= on any redesign) so browser
+     favicon caches actually pick up changes; PNG fallback for Safari. -->
+<link rel="icon" type="image/svg+xml" href="favicon.svg?v=2">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=2">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=2">
 
 <style>
 /* ============================================================
