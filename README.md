@@ -21,7 +21,7 @@ and each page carries its own copy of the design tokens.
 |---|---|
 | Hero | AREEL wordmark, GitHub link, site spec block |
 | Origin | Collapsed to a magenta hairline; expands to the name story + album embed |
-| `01 / Works` | Hydrogen — Micro Agents, the request flow, two use cases, and FishBall as a client built on it |
+| `01 / Works` | Two units, each in its own card: **Hydrogen** (Micro Agents, the request flow, two use cases) and **FishBall** (source grading, the turn pipeline, two use cases) |
 | `02 / Pending` | Placeholder for what lands next |
 
 ## FishBall releases

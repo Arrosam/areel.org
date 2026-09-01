@@ -141,14 +141,26 @@ a{ color:inherit; }
   background-size:4px 4px; background-repeat:no-repeat;
 }
 
+/*
+   The checkerboard, at two scales.
+
+   `--sq` is the side of one square. 7px is the fine weave, and it belongs on
+   small parts — the 14px spec bar, where anything coarser would show two
+   squares and read as a mistake. Used over a large panel that same weave
+   shimmers: the squares land near the eye's resolution limit and the field
+   crawls. `.checker.coarse` is four times the square for exactly that reason,
+   and every panel-sized use takes it.
+*/
 .checker{
+  --sq:7px;
   background-image:
     linear-gradient(45deg, var(--ink) 25%, transparent 25% 75%, var(--ink) 75%),
     linear-gradient(45deg, var(--ink) 25%, transparent 25% 75%, var(--ink) 75%);
-  background-size:14px 14px;
-  background-position:0 0, 7px 7px;
+  background-size:calc(var(--sq) * 2) calc(var(--sq) * 2);
+  background-position:0 0, var(--sq) var(--sq);
   background-color:#f2f2ee;
 }
+.checker.coarse{ --sq:28px; }
 
 /* ---------- fixed chrome -------------------------------- */
 
@@ -469,40 +481,6 @@ code.inl{
 .btn.ghost:hover{ transform:translate(-2px,-2px); box-shadow:4px 4px 0 var(--ink); background:rgba(255,255,255,.4); }
 .btn svg{ width:11px; height:11px; }
 
-/* ---------- built on hydrogen ---------------------------
-   A unit that is not its own entry. FishBall sits inside the
-   Hydrogen card because that is the honest relationship: it
-   is a client, and it is here to show what the proxy is for. */
-
-.builton{
-  grid-column:1 / -1;
-  display:grid; grid-template-columns:1fr; gap:0;
-  border:1px solid var(--ink-20); margin-top:clamp(1.5rem,3.5vw,2.5rem);
-}
-@media (min-width:860px){ .builton{ grid-template-columns:auto 1fr; } }
-
-/* the mark panel — checkerboard, with the app's own glyph on it */
-.builton-mark{
-  display:grid; place-items:center; padding:clamp(1.5rem,3.5vw,2.25rem);
-  border-bottom:1px solid var(--ink-20);
-}
-@media (min-width:860px){
-  .builton-mark{ border-bottom:0; border-right:1px solid var(--ink-20); width:clamp(150px,18vw,210px); }
-}
-.builton-mark svg{ width:clamp(56px,8vw,86px); height:auto; }
-
-.builton-body{ padding:clamp(1.5rem,3.5vw,2.25rem); background:rgba(255,255,255,.32); }
-.builton-eyebrow{ display:flex; align-items:center; gap:.75rem; color:var(--ink-40); margin-bottom:.9rem; }
-.builton-eyebrow::after{ content:""; flex:1; height:1px; background:var(--ink-20); }
-.builton-body h4{
-  margin:0 0 .7rem; font-size:clamp(1.4rem,3vw,2rem); line-height:1.02;
-  letter-spacing:-.03em; text-transform:uppercase;
-  font-variation-settings:"wdth" 114,"wght" 800;
-}
-.builton-body p{ margin:0 0 .9rem; max-width:56ch; color:var(--ink-60); }
-.builton-body p:last-of-type{ margin-bottom:0; }
-.builton-body .actions{ margin-top:1.35rem; }
-
 /* ---------- pending ------------------------------------- */
 
 .pending{
@@ -775,29 +753,6 @@ section{ padding-block:clamp(3.5rem,9vh,7rem); }
 
             </div>
         </div>
-        <!-- spans both columns: the client, shown where the thing it is built on is explained -->
-        <div class="builton">
-          <div class="builton-mark checker">
-            <!-- FishBall's mark: every edge on 0/45/90, head into the upper right -->
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M7.4 16.6V9.9l3.9-4.3h7.1v7.1l-4.3 3.9zM7.4 16.6 2.6 21.4h4.8z" fill="#101010"/>
-              <rect x="14.6" y="7.4" width="2" height="2" fill="#ec0a6e"/>
-            </svg>
-          </div>
-          <div class="builton-body">
-            <div class="builton-eyebrow mono">Built on Hydrogen</div>
-            <h4>FishBall</h4>
-            <p><strong>A search agent for Android that will not guess.</strong> It grades every source it reads, names the publisher inside the sentence you are reading, and cuts quotations out of the retrieved page rather than letting the model write them. When nothing trustworthy turns up, it says so instead of answering.</p>
-            <p>It is the case Hydrogen was built for. A phone app cannot carry an orchestration layer around with it, so the whole pipeline — classify the question, choose the evidence, verify each quote — is <span class="k">one model name to the client</span> and several calls behind the proxy.</p>
-            <div class="actions">
-              <a class="btn solid" href="fishball/en/">
-                FishBall — official site
-                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 10 10 2M4 2h6v6"/></svg>
-              </a>
-              <a class="btn ghost" href="https://github.com/Arrosam/fishball" target="_blank" rel="noopener">Source</a>
-            </div>
-          </div>
-        </div>
       </div>
 
       <div class="actions">
@@ -806,6 +761,106 @@ section{ padding-block:clamp(3.5rem,9vh,7rem); }
           <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 10 10 2M4 2h6v6"/></svg>
         </a>
         <a class="btn ghost" href="https://github.com/Arrosam/Hydrogen-LLM-proxy/blob/main/docs/getting-started.md" target="_blank" rel="noopener">Build a Micro Agent</a>
+      </div>
+    </article>
+
+    <article class="unit shell rise" style="margin-top:clamp(1.75rem,4vw,3rem)">
+      <div class="unit-top">
+        <div>
+          <h2 class="unit-name">
+            <a href="https://github.com/Arrosam/fishball" target="_blank" rel="noopener">
+              FishBall<sup>鱼丸</sup><svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10 10 2M4 2h6v6"/></svg>
+            </a>
+          </h2>
+          <p class="unit-kicker">Search agent for Android. The trick is <span class="k">refusing to guess</span> — every claim traceable to a graded publisher, or no claim at all.</p>
+        </div>
+        <div class="tags">
+          <span class="tag hot">Live</span>
+          <span class="tag">Kotlin</span>
+          <span class="tag">MIT</span>
+          <span class="tag">Android</span>
+        </div>
+      </div>
+
+      <div class="unit-body">
+        <div>
+          <h3>The core — sourcing you can check</h3>
+          <p class="hit">Every answer names<br><em>where it came from.</em></p>
+          <p><strong>Each result is graded by who published it</strong> — a regulator, an edited institution, a named individual, or an anonymous post — before a word is written. The grade sits under the answer and changes its wording, so a claim resting on one forum thread never sounds like one resting on a health ministry.</p>
+          <p>When nothing above the bottom rung turns up, it says so rather than answering. <span class="k">An unsourced answer looks exactly like a good one minus a citation nobody notices is missing.</span></p>
+        </div>
+
+        <div>
+          <h3>Inside one question</h3>
+          <div class="schematic">
+            <div class="node">
+              <span class="lbl">User asks</span>
+              <span class="val">one ordinary question</span>
+            </div>
+            <div class="wire"><span>searched, then graded</span></div>
+            <div class="node accent">
+              <span class="lbl">Stage 1 — weigh</span>
+              <span class="val">every source placed on the ladder</span>
+            </div>
+            <div class="wire"><span>now try to break it</span></div>
+            <div class="node accent">
+              <span class="lbl">Stage 2 — disconfirm</span>
+              <span class="val">a second search argues the other way</span>
+            </div>
+            <div class="wire"><span>each quote cut and checked</span></div>
+            <div class="node">
+              <span class="lbl">User gets</span>
+              <span class="val">an answer, and its receipts</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="usecases">
+            <div class="uc-head mono">In practice</div>
+            <div class="uc-grid">
+
+              <article class="uc">
+                <span class="uc-idx mono">01</span>
+                <h4>Quotes are cut, not written</h4>
+                <p class="uc-hit">The model points. The verifier cuts.</p>
+                <p>When a source's exact words appear, the model never types them. It selects a span, and that span is <b>sliced out of the retrieved page and checked character by character</b> before anyone sees it. <span class="k">No path through the code lets an invented quote reach the screen.</span></p>
+                <div class="uc-flow mono">
+                  <span><b>select</b> · model names a span</span>
+                  <span><b>verify</b> · sliced from the fetched page</span>
+                  <span class="arw">matches →</span>
+                  <span class="hot">quote shown → end</span>
+                  <span class="arw">else rejected ↓</span>
+                  <span><b>retry</b> · model told why → end</span>
+                </div>
+                <p class="uc-note">Costs nothing extra when the model quotes honestly, which is most of the time.</p>
+              </article>
+
+              <article class="uc">
+                <span class="uc-idx mono">02</span>
+                <h4>It argues with itself</h4>
+                <p class="uc-hit">A second search tries to prove the first wrong.</p>
+                <p>On anything that matters the app searches <b>against</b> what it just found. If the two sides disagree it shows both and says so. <span class="k">Silent agreement with the first page read is how a confident wrong answer gets made.</span></p>
+                <div class="uc-flow mono">
+                  <span><b>support</b> · what the question asked</span>
+                  <span><b>disconfirm</b> · the opposite claim</span>
+                  <span class="arw">they agree →</span>
+                  <span class="hot">answer plainly → end</span>
+                  <span class="arw">else fall through ↓</span>
+                  <span><b>show both</b> · name the disagreement → end</span>
+                </div>
+                <p class="uc-note">Costs one extra search round. It is why a health question takes twenty to forty seconds.</p>
+              </article>
+
+            </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <a class="btn solid" href="fishball/en/">
+          Official site — and the installer
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 10 10 2M4 2h6v6"/></svg>
+        </a>
+        <a class="btn ghost" href="https://github.com/Arrosam/fishball" target="_blank" rel="noopener">Source on GitHub</a>
       </div>
     </article>
   </div>
@@ -832,7 +887,7 @@ section{ padding-block:clamp(3.5rem,9vh,7rem); }
           </a>
         </div>
       </div>
-      <div class="pending-tile checker" aria-hidden="true"></div>
+      <div class="pending-tile checker coarse" aria-hidden="true"></div>
     </div>
   </div>
 </section>
