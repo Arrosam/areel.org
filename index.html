@@ -347,6 +347,15 @@ a{ color:inherit; }
 }
 .unit-name a:hover{ color:var(--magenta); }
 .unit-name a:focus-visible{ outline:2px solid var(--magenta); outline-offset:6px; }
+/* the app's own glyph, sized off the wordmark so it scales with it. Optically
+   centred on the cap height rather than the line box - sitting it on the
+   baseline left it floating above the letters at every size. */
+.unit-name .unit-mark{
+  width:.82em; height:.82em; flex:none; margin-right:.16em;
+  align-self:center; position:relative; top:.04em;
+}
+.unit-name a:hover .unit-mark{ color:var(--magenta); }
+
 .unit-name .arrow{
   width:.26em; height:.26em; margin-top:.12em; flex:none; color:var(--magenta);
   opacity:.45; transition:opacity .3s var(--ease), transform .3s var(--ease);
@@ -412,6 +421,92 @@ code.inl{
   position:absolute; left:.85rem; top:50%; transform:translateY(-50%);
   font-size:.5625rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-40);
   white-space:nowrap; background:var(--concrete); padding-inline:.35rem;
+}
+
+/* ---------- fishball's thinking widget ------------------
+   Transcribed from the app's PendingBubble, not approximated:
+   a 14px cut on the top-left, a 45deg hatch at 8px, a 24px
+   magenta segment lapping the outline every 5.6s, and three
+   squares rising off the fish's head. The numbers below are
+   the ones in Components.kt, in px where it says dp.       */
+
+.think{
+  position:relative;
+  background:var(--paper);
+  /* the hatch, drawn under everything and clipped by the same cut */
+  background-image:repeating-linear-gradient(-45deg, transparent 0 7px, var(--ink-06) 7px 8px);
+  clip-path:polygon(14px 0, 100% 0, 100% 100%, 0 100%, 0 14px);
+  padding:16px;
+}
+/* the outline and the lap. An SVG rather than a border, because a border cannot
+   follow a clip-path and the cut edge would come out unlined. */
+.think-edge{ position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+.think-edge .rule{ fill:none; stroke:var(--ink-20); stroke-width:1; }
+.think-edge .lap{
+  fill:none; stroke:var(--magenta); stroke-width:2;
+  stroke-dasharray:var(--lap-dash, 24 400);
+  animation:lap 5.6s linear infinite;
+}
+@keyframes lap{ to{ stroke-dashoffset:calc(-1 * var(--lap-len, 424px)); } }
+
+.think-head{ display:flex; align-items:center; gap:11px; }
+
+/* Bubbling(): a 46x34 box, the mark on the floor of it, three squares leaving */
+.bubbling{ position:relative; width:46px; height:34px; flex:none; }
+.bubbling .mark{ position:absolute; left:0; bottom:0; width:26px; height:26px; }
+.bubbling i{
+  position:absolute; right:0; top:0; display:block; background:var(--magenta);
+  animation:bub 1.5s linear infinite; animation-delay:var(--d); opacity:0;
+}
+/* x drifts right as it climbs, so three identical squares do not read as one
+   square stuttering; the sizes step down so the stream has a front and a back */
+.bubbling i:nth-child(2){ --bx:-10px; --d:0ms;   width:5px; height:5px; }
+.bubbling i:nth-child(3){ --bx:-5px;  --d:380ms; width:4px; height:4px; }
+.bubbling i:nth-child(4){ --bx:0px;   --d:760ms; width:3px; height:3px; }
+/* fade in fast, out slow: a bubble that pops at full strength reads as a dropped frame */
+@keyframes bub{
+  0%   { transform:translate(var(--bx),26px); opacity:0; }
+  20%  { opacity:.78; }
+  100% { transform:translate(calc(var(--bx) + 8px),0); opacity:0; }
+}
+
+.think-label{
+  font-family:var(--mono); font-size:.6875rem; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--ink);
+}
+
+.think-steps{ margin:0; padding:0; list-style:none; }
+.think-steps li{
+  display:flex; align-items:center; gap:10px; margin-top:7px;
+  font-family:var(--mono); font-size:.75rem; color:var(--ink-40);
+  opacity:0; transition:opacity .35s var(--ease), color .35s var(--ease);
+}
+.think-steps li::before{
+  content:""; width:4px; height:4px; flex:none; background:var(--ink-40); opacity:.35;
+}
+.think-steps li.shown{ opacity:1; }
+/* the one happening now: magenta, and breathing at the app's 900ms */
+.think-steps li.live{ color:var(--ink); }
+.think-steps li.live::before{
+  background:var(--magenta); opacity:1; animation:pulse-dot .9s linear infinite alternate;
+}
+@keyframes pulse-dot{ from{ opacity:.35; } to{ opacity:1; } }
+
+/* the answer, arriving underneath. The app replaces the reasoning with the reply
+   when there is one, so the widget ends where a real turn ends. */
+.think-out{
+  margin-top:11px; padding-top:9px; border-top:1px solid var(--ink-20);
+  font-size:.875rem; line-height:1.6; color:var(--ink);
+  opacity:0; transition:opacity .5s var(--ease);
+}
+.think-out.shown{ opacity:1; }
+.think-out .cite{ color:var(--magenta); font-variation-settings:"wdth" 100,"wght" 700; }
+
+@media (prefers-reduced-motion:reduce){
+  .think-edge .lap, .bubbling i{ animation:none; }
+  .bubbling i{ opacity:.5; transform:translate(var(--bx),8px); }
+  .think-steps li, .think-out{ opacity:1; }
+  .think-steps li.live::before{ animation:none; }
 }
 
 /* ---------- use cases: the dark band, inset ------------
@@ -769,7 +864,10 @@ section{ padding-block:clamp(3.5rem,9vh,7rem); }
         <div>
           <h2 class="unit-name">
             <a href="https://github.com/Arrosam/fishball" target="_blank" rel="noopener">
-              FishBall<sup>鱼丸</sup><svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10 10 2M4 2h6v6"/></svg>
+              <svg class="unit-mark" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7.4 16.6V9.9l3.9-4.3h7.1v7.1l-4.3 3.9zM7.4 16.6 2.6 21.4h4.8z" fill="currentColor"/>
+                <rect x="14.6" y="7.4" width="2" height="2" fill="#ec0a6e"/>
+              </svg>FishBall<sup>鱼丸</sup><svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10 10 2M4 2h6v6"/></svg>
             </a>
           </h2>
           <p class="unit-kicker">Search agent for Android. The trick is <span class="k">refusing to guess</span> — every claim traceable to a graded publisher, or no claim at all.</p>
@@ -792,26 +890,35 @@ section{ padding-block:clamp(3.5rem,9vh,7rem); }
 
         <div>
           <h3>Inside one question</h3>
-          <div class="schematic">
-            <div class="node">
-              <span class="lbl">User asks</span>
-              <span class="val">one ordinary question</span>
+          <!-- the app's own waiting state, transcribed. It narrates because a turn takes
+               twenty to forty seconds, and somebody watching a spinner deserves to know
+               the app is currently trying to prove itself wrong. -->
+          <div class="think" id="think">
+            <svg class="think-edge" aria-hidden="true">
+              <path class="rule"></path>
+              <path class="lap"></path>
+            </svg>
+
+            <div class="think-head">
+              <span class="bubbling" aria-hidden="true">
+                <svg class="mark" viewBox="0 0 24 24">
+                  <path d="M7.4 16.6V9.9l3.9-4.3h7.1v7.1l-4.3 3.9zM7.4 16.6 2.6 21.4h4.8z" fill="#101010"/>
+                  <rect x="14.6" y="7.4" width="2" height="2" fill="#ec0a6e"/>
+                </svg>
+                <i></i><i></i><i></i>
+              </span>
+              <span class="think-label">Thinking…</span>
             </div>
-            <div class="wire"><span>searched, then graded</span></div>
-            <div class="node accent">
-              <span class="lbl">Stage 1 — weigh</span>
-              <span class="val">every source placed on the ladder</span>
-            </div>
-            <div class="wire"><span>now try to break it</span></div>
-            <div class="node accent">
-              <span class="lbl">Stage 2 — disconfirm</span>
-              <span class="val">a second search argues the other way</span>
-            </div>
-            <div class="wire"><span>each quote cut and checked</span></div>
-            <div class="node">
-              <span class="lbl">User gets</span>
-              <span class="val">an answer, and its receipts</span>
-            </div>
+
+            <ul class="think-steps">
+              <li>Searched — 9 results back</li>
+              <li>Read the drug regulator’s leaflet</li>
+              <li>Graded every publisher</li>
+              <li>Searching the other way now</li>
+              <li>Checking each quote against its page</li>
+            </ul>
+
+            <p class="think-out">Yes — the most common side effects are in the gut, and <span class="cite">the drug regulator’s own leaflet</span> lists nausea and heartburn first.</p>
           </div>
         </div>
 
@@ -971,6 +1078,83 @@ section{ padding-block:clamp(3.5rem,9vh,7rem); }
     if (!el.style.getPropertyValue('--d')) el.style.setProperty('--d', (i % 3) * 90 + 'ms');
     io.observe(el);
   });
+})();
+
+// FishBall's thinking widget: the outline, and the turn it narrates.
+//
+// The path is built from the measured box rather than scaled, so the 14px cut stays 14px and
+// the 2px lap stays 2px at every width - preserveAspectRatio="none" would skew both.
+(function () {
+  var box = document.getElementById('think');
+  if (!box) return;
+  var svg = box.querySelector('.think-edge');
+  var rule = svg.querySelector('.rule');
+  var lap = svg.querySelector('.lap');
+  var steps = [].slice.call(box.querySelectorAll('.think-steps li'));
+  var out = box.querySelector('.think-out');
+  var CUT = 14;
+
+  function shape() {
+    var w = box.clientWidth, h = box.clientHeight;
+    if (!w || !h) return;
+    // Inset by half the stroke. The box is clipped to this same outline, so a path drawn
+    // on the edge loses the outer half of every stroke: the 1px rule came out at half a
+    // pixel and the 2px lap at one.
+    function ring(i) {
+      return 'M ' + (CUT + i) + ' ' + i + ' L ' + (w - i) + ' ' + i +
+             ' L ' + (w - i) + ' ' + (h - i) + ' L ' + i + ' ' + (h - i) +
+             ' L ' + i + ' ' + (CUT + i) + ' Z';
+    }
+    svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+    rule.setAttribute('d', ring(0.5));
+    lap.setAttribute('d', ring(1));
+    var len = lap.getTotalLength();
+    // one 24px segment, and a gap long enough that only ever one is on the path
+    lap.style.setProperty('--lap-dash', '24 ' + Math.max(len - 24, 1));
+    lap.style.setProperty('--lap-len', len + 'px');
+  }
+
+  shape();
+  if ('ResizeObserver' in window) new ResizeObserver(shape).observe(box);
+  else addEventListener('resize', shape);
+
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  // The turn, on a loop. Steps land one at a time the way the app appends them, the newest is
+  // the live one, and the answer arrives when there is nothing left to narrate.
+  var STEP_MS = 1700, HOLD_MS = 4200, i = 0, timer = null;
+
+  function reset() {
+    steps.forEach(function (s) { s.classList.remove('shown', 'live'); });
+    out.classList.remove('shown');
+    i = 0;
+    timer = setTimeout(tick, 700);
+  }
+
+  function tick() {
+    if (i > 0) steps[i - 1].classList.remove('live');
+    if (i < steps.length) {
+      steps[i].classList.add('shown', 'live');
+      i++;
+      timer = setTimeout(tick, STEP_MS);
+    } else {
+      out.classList.add('shown');
+      timer = setTimeout(reset, HOLD_MS);
+    }
+  }
+
+  reset();
+
+  // Nothing to narrate to an empty room: the loop pauses while the widget is off screen, so a
+  // backgrounded tab is not running a timer for a picture nobody is looking at.
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { if (!timer) reset(); }
+        else { clearTimeout(timer); timer = null; }
+      });
+    }, { threshold: 0.15 }).observe(box);
+  }
 })();
 
 // Parallax on the magenta swoop — slow drift, cheap enough to run on rAF.
