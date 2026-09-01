@@ -2,18 +2,57 @@
 
 Landing page for **areel.org** — open source works.
 
-A single self-contained `index.html`. No build step, no dependencies, no framework.
-Fonts come from Google Fonts and the album player is a Spotify embed; everything
-else is inline.
+Self-contained HTML. No build step, no dependencies, no framework. Fonts come from
+Google Fonts and the album player is a Spotify embed; everything else is inline,
+and each page carries its own copy of the design tokens.
 
 ## Structure
+
+| Path | What it is |
+|---|---|
+| `index.html` | The landing page |
+| `fishball/` | Language stub — redirects to `fishball/en/` |
+| `fishball/en/` | FishBall's official site, in English |
+| `fishball/latest.json` | Release manifest. **The app reads this on launch** |
+
+### `index.html`
 
 | Section | What it is |
 |---|---|
 | Hero | AREEL wordmark, GitHub link, site spec block |
 | Origin | Collapsed to a magenta hairline; expands to the name story + album embed |
-| `01 / Works` | Hydrogen — Micro Agents, the request flow, two use cases |
+| `01 / Works` | Hydrogen — Micro Agents, the request flow, two use cases, and FishBall as a client built on it |
 | `02 / Pending` | Placeholder for what lands next |
+
+## FishBall releases
+
+[FishBall](https://github.com/Arrosam/fishball) is sideloaded, so this site is where it
+learns that a new build exists. On launch the app fetches `fishball/latest.json` and
+offers anything whose `versionCode` is higher than its own.
+
+```json
+{
+  "versionCode": 2,
+  "versionName": "0.2a",
+  "url": "https://github.com/Arrosam/fishball/releases/latest/download/fishball.apk",
+  "size": 1879602,
+  "notes": "shown verbatim in the modal, in Chinese"
+}
+```
+
+To publish an update:
+
+1. Attach the APK to a GitHub release on `Arrosam/fishball`, named **`fishball.apk`** —
+   the `releases/latest/download/` URL only stays stable if the asset name does.
+2. Bump `versionCode`, `versionName` and `size` here, and write `notes`.
+3. Push. GitHub Pages redeploys, and the next phone to open the app is offered it.
+
+`versionCode` is what decides, never `versionName`: comparing "0.1a" to "0.10a" as text is
+how an update stops arriving three releases later. The English page reads its version number
+from the same file, so it never has to be edited to match.
+
+The one localised page is `fishball/en/`. Translations go beside it — `fishball/zh/` and so
+on — and the stub at `fishball/` is what picks between them.
 
 Design follows the *AREEL* album cover: flat concrete grey, one magenta sweep,
 CAD hairlines visible through clear-plastic panels, checkerboard, near-black band.

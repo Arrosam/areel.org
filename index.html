@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AREEL — open source works</title>
-<meta name="description" content="areel.org — open source works by W.L. (@Arrosam). Home of Hydrogen, a lightweight personal LLM proxy.">
+<meta name="description" content="areel.org — open source works by W.L. (@Arrosam). Home of Hydrogen, a lightweight personal LLM proxy, and FishBall, a search agent that cites what it reads.">
 <meta name="theme-color" content="#c9c9c5">
 
 <meta property="og:title" content="AREEL — open source works">
@@ -469,6 +469,40 @@ code.inl{
 .btn.ghost:hover{ transform:translate(-2px,-2px); box-shadow:4px 4px 0 var(--ink); background:rgba(255,255,255,.4); }
 .btn svg{ width:11px; height:11px; }
 
+/* ---------- built on hydrogen ---------------------------
+   A unit that is not its own entry. FishBall sits inside the
+   Hydrogen card because that is the honest relationship: it
+   is a client, and it is here to show what the proxy is for. */
+
+.builton{
+  grid-column:1 / -1;
+  display:grid; grid-template-columns:1fr; gap:0;
+  border:1px solid var(--ink-20); margin-top:clamp(1.5rem,3.5vw,2.5rem);
+}
+@media (min-width:860px){ .builton{ grid-template-columns:auto 1fr; } }
+
+/* the mark panel — checkerboard, with the app's own glyph on it */
+.builton-mark{
+  display:grid; place-items:center; padding:clamp(1.5rem,3.5vw,2.25rem);
+  border-bottom:1px solid var(--ink-20);
+}
+@media (min-width:860px){
+  .builton-mark{ border-bottom:0; border-right:1px solid var(--ink-20); width:clamp(150px,18vw,210px); }
+}
+.builton-mark svg{ width:clamp(56px,8vw,86px); height:auto; }
+
+.builton-body{ padding:clamp(1.5rem,3.5vw,2.25rem); background:rgba(255,255,255,.32); }
+.builton-eyebrow{ display:flex; align-items:center; gap:.75rem; color:var(--ink-40); margin-bottom:.9rem; }
+.builton-eyebrow::after{ content:""; flex:1; height:1px; background:var(--ink-20); }
+.builton-body h4{
+  margin:0 0 .7rem; font-size:clamp(1.4rem,3vw,2rem); line-height:1.02;
+  letter-spacing:-.03em; text-transform:uppercase;
+  font-variation-settings:"wdth" 114,"wght" 800;
+}
+.builton-body p{ margin:0 0 .9rem; max-width:56ch; color:var(--ink-60); }
+.builton-body p:last-of-type{ margin-bottom:0; }
+.builton-body .actions{ margin-top:1.35rem; }
+
 /* ---------- pending ------------------------------------- */
 
 .pending{
@@ -601,7 +635,7 @@ section{ padding-block:clamp(3.5rem,9vh,7rem); }
       <dl>
         <dt>Domain</dt>   <dd>areel.org</dd>
         <dt>Maintainer</dt><dd><a href="https://github.com/Arrosam" rel="me noopener" target="_blank">@Arrosam</a></dd>
-        <dt>Units live</dt><dd>01</dd>
+        <dt>Units live</dt><dd>02</dd>
         <dt>Licence</dt>  <dd>MIT</dd>
         <dt>Status</dt>   <dd style="color:var(--magenta)">Shipping</dd>
       </dl>
@@ -741,6 +775,29 @@ section{ padding-block:clamp(3.5rem,9vh,7rem); }
 
             </div>
         </div>
+        <!-- spans both columns: the client, shown where the thing it is built on is explained -->
+        <div class="builton">
+          <div class="builton-mark checker">
+            <!-- FishBall's mark: every edge on 0/45/90, head into the upper right -->
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7.4 16.6V9.9l3.9-4.3h7.1v7.1l-4.3 3.9zM7.4 16.6 2.6 21.4h4.8z" fill="#101010"/>
+              <rect x="14.6" y="7.4" width="2" height="2" fill="#ec0a6e"/>
+            </svg>
+          </div>
+          <div class="builton-body">
+            <div class="builton-eyebrow mono">Built on Hydrogen</div>
+            <h4>FishBall</h4>
+            <p><strong>A search agent for Android that will not guess.</strong> It grades every source it reads, names the publisher inside the sentence you are reading, and cuts quotations out of the retrieved page rather than letting the model write them. When nothing trustworthy turns up, it says so instead of answering.</p>
+            <p>It is the case Hydrogen was built for. A phone app cannot carry an orchestration layer around with it, so the whole pipeline — classify the question, choose the evidence, verify each quote — is <span class="k">one model name to the client</span> and several calls behind the proxy.</p>
+            <div class="actions">
+              <a class="btn solid" href="fishball/en/">
+                FishBall — official site
+                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 10 10 2M4 2h6v6"/></svg>
+              </a>
+              <a class="btn ghost" href="https://github.com/Arrosam/fishball" target="_blank" rel="noopener">Source</a>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="actions">
@@ -788,6 +845,7 @@ section{ padding-block:clamp(3.5rem,9vh,7rem); }
       <nav class="band-links">
         <a href="https://github.com/Arrosam" target="_blank" rel="noopener">GitHub</a>
         <a href="https://github.com/Arrosam/Hydrogen-LLM-proxy" target="_blank" rel="noopener">Hydrogen</a>
+        <a href="fishball/en/">FishBall</a>
         <a href="https://open.spotify.com/album/21B5VAW5SV8fceF3fxjJSp" target="_blank" rel="noopener">The record</a>
       </nav>
     </div>
