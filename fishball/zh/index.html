@@ -1,19 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FishBall — an answer you can check</title>
-<meta name="description" content="FishBall is a search agent for Android that names its sources, quotes them word for word, and says plainly when it found nothing reliable.">
+<title>鱼丸 — 每句话都能查到出处</title>
+<meta name="description" content="鱼丸是一个安卓上的查资料助手：每个答案都说明来源，引用来源的原话，查不到可靠资料就直说。">
 <meta name="theme-color" content="#c9c9c5">
 
-<meta property="og:title" content="FishBall — an answer you can check">
-<meta property="og:description" content="A search agent for Android that names its sources, quotes them word for word, and refuses to guess.">
+<meta property="og:title" content="鱼丸 — 每句话都能查到出处">
+<meta property="og:description" content="安卓上的查资料助手。每个答案都说明来源，原话逐字引用，不瞎猜。">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://areel.org/fishball/en/">
-<link rel="canonical" href="https://areel.org/fishball/en/">
-<link rel="alternate" hreflang="en" href="https://areel.org/fishball/en/">
+<meta property="og:url" content="https://areel.org/fishball/zh/">
+<meta property="og:locale" content="zh_CN">
+<link rel="canonical" href="https://areel.org/fishball/zh/">
 <link rel="alternate" hreflang="zh" href="https://areel.org/fishball/zh/">
+<link rel="alternate" hreflang="en" href="https://areel.org/fishball/en/">
 <link rel="alternate" hreflang="x-default" href="https://areel.org/fishball/">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,11 +27,12 @@
 
 <style>
 /* ============================================================
-   FISHBALL — areel.org/fishball
-   Same design language as the parent site: flat concrete, one
-   magenta sweep, clear-plastic shells over CAD hairlines,
-   checkerboard, near-black band. The app is built to this
-   language too, so the page and the product are one thing.
+   鱼丸 — areel.org/fishball/zh
+   The English page's design, word for word in the stylesheet:
+   flat concrete, one magenta sweep, clear-plastic shells over
+   CAD hairlines, checkerboard, near-black band. Only the copy
+   and a short block of CJK type rules differ - see the end of
+   the stylesheet. Keep the two in step when one changes.
    ============================================================ */
 
 :root{
@@ -50,7 +52,8 @@
   --gut: clamp(1.25rem, 4vw, 4.5rem);
   --maxw: 1360px;
 
-  --display: "Archivo", "Helvetica Neue", sans-serif;
+  /* Archivo carries the Latin; it has no hanzi, so the system's CJK face carries the rest. */
+  --display: "Archivo", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC", "Helvetica Neue", sans-serif;
   --mono: "JetBrains Mono", ui-monospace, monospace;
 
   --ease: cubic-bezier(.16,.84,.32,1);
@@ -132,15 +135,6 @@ a{ color:inherit; }
   background-size:4px 4px; background-repeat:no-repeat;
 }
 
-/*
-   The checkerboard, at two scales.
-
-   `--sq` is the side of one square. 7px is the fine weave and belongs on small
-   parts — the 14px spec bar, where anything coarser would show two squares and
-   read as a mistake. Over a large panel that same weave shimmers: the squares
-   land near the eye's resolution limit and the field crawls. `.coarse` is four
-   times the square for exactly that reason, and every panel-sized use takes it.
-*/
 .checker{
   --sq:7px;
   background-image:
@@ -201,6 +195,12 @@ a{ color:inherit; }
   transition:color .3s var(--ease);
 }
 .upstream:hover{ color:var(--magenta); }
+.upstream .arr{ width:14px; height:1px; background:currentColor; position:relative; }
+.upstream .arr::before{
+  content:""; position:absolute; left:0; top:-2px;
+  border-top:2.5px solid transparent; border-bottom:2.5px solid transparent;
+  border-right:4px solid currentColor;
+}
 
 /* the same hairline, the other way: the other language of this page */
 .topline{ display:flex; align-items:center; justify-content:space-between; gap:1rem; }
@@ -209,12 +209,6 @@ a{ color:inherit; }
   transition:color .3s var(--ease);
 }
 .lang:hover{ color:var(--magenta); }
-.upstream .arr{ width:14px; height:1px; background:currentColor; position:relative; }
-.upstream .arr::before{
-  content:""; position:absolute; left:0; top:-2px;
-  border-top:2.5px solid transparent; border-bottom:2.5px solid transparent;
-  border-right:4px solid currentColor;
-}
 
 /* ---------- hero ---------------------------------------- */
 
@@ -235,6 +229,13 @@ a{ color:inherit; }
   font-size:clamp(2.6rem, 12.6vw, 11.5rem);
   font-variation-settings:"wdth" 122,"wght" 900;
   text-transform:uppercase; white-space:nowrap;
+}
+
+/* the app's own name, beside the Latin wordmark, at the size the launcher shows it */
+.cn-name{
+  align-self:flex-end; margin-bottom:clamp(.2rem,1vw,.9rem);
+  font-family:var(--mono); font-size:clamp(.75rem,1.4vw,1.1rem); letter-spacing:.18em;
+  padding:.35rem .6rem; background:var(--magenta); color:#fff; white-space:nowrap;
 }
 
 .lede{
@@ -303,6 +304,7 @@ a{ color:inherit; }
 .rung[data-fill="2"] .meter i:nth-child(-n+2),
 .rung[data-fill="1"] .meter i:nth-child(-n+1){ background:var(--tier,var(--magenta)); }
 .rung .name{ font-variation-settings:"wdth" 108,"wght" 700; text-transform:uppercase; letter-spacing:-.01em; }
+.rung .name small{ font-weight:400; color:var(--ink-40); margin-left:.5rem; font-size:.8125rem; }
 .rung .what{ display:block; color:var(--ink-60); font-size:.875rem; margin-top:.15rem; }
 
 /* ---------- the sample answer --------------------------- */
@@ -413,11 +415,23 @@ a{ color:inherit; }
 }
 
 section{ padding-block:clamp(3rem,7.5vh,6rem); }
+
+/* ---------- CJK type ------------------------------------
+   The tracking above was set for Archivo's capitals. Negative
+   tracking cramps hanzi, and the headings are hanzi here; the
+   body reads better with a little more leading. Nothing else
+   about the page changes with the language.
+   -------------------------------------------------------- */
+body{ line-height:1.75; }
+.sheet-head h2, .claim-hit, .card h3, .get-copy h3, .rung .name{ letter-spacing:0; }
+.claim-hit{ line-height:1.15; }
+.lede{ line-height:1.65; }
+.card p, .rung .what, .note-strip, .steps li, .get-copy p, .sheet-head .note{ line-height:1.8; }
 </style>
 </head>
 <body>
 
-<div class="rail" aria-hidden="true"><span>areel.org — fishball</span></div>
+<div class="rail" aria-hidden="true"><span>areel.org — 鱼丸</span></div>
 <div class="crop tr" aria-hidden="true"></div>
 <div class="crop br" aria-hidden="true"></div>
 
@@ -438,7 +452,7 @@ section{ padding-block:clamp(3rem,7.5vh,6rem); }
     <a class="upstream mono" href="../../">
       <i class="arr" aria-hidden="true"></i> areel.org
     </a>
-    <a class="lang mono" href="../zh/" lang="zh" hreflang="zh">中文</a>
+    <a class="lang mono" href="../en/" lang="en" hreflang="en">English</a>
   </div>
 
   <div class="wrap hero-grid boot" style="margin-top:clamp(1.5rem,4vw,2.5rem)">
@@ -449,30 +463,31 @@ section{ padding-block:clamp(3rem,7.5vh,6rem); }
         <rect x="14.6" y="7.4" width="2" height="2" fill="#ec0a6e"/>
       </svg>
       <h1 class="wordmark">Fishball</h1>
+      <span class="cn-name" aria-label="中文名">鱼丸AI</span>
     </div>
 
     <div>
-      <p class="lede">A search agent for Android that <b>names where every answer came from</b>, quotes the source in its own words, and tells you plainly when it found nothing worth trusting.</p>
+      <p class="lede">一个安卓上的查资料助手。<b>每个答案都说明是从哪儿查到的</b>，引用来源的原话，查不到靠得住的资料就直接告诉你。</p>
       <div class="actions">
         <a class="btn solid" href="https://github.com/Arrosam/fishball/releases/download/v0.2.0a/fishball-0.2.0a.apk">
-          Download the installer
+          下载安装包
           <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 1v8M3 6.5 6 9.5 9 6.5M2 11h8"/></svg>
         </a>
         <a class="btn ghost" href="https://github.com/Arrosam/fishball" target="_blank" rel="noopener">
-          Source on GitHub
+          GitHub 源码
           <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 10 10 2M4 2h6v6"/></svg>
         </a>
       </div>
     </div>
 
-    <aside class="spec shell screws" aria-label="Build details">
+    <aside class="spec shell screws" aria-label="版本信息">
       <dl>
-        <dt>Version</dt>  <dd id="v-name">0.2.0a</dd>
-        <dt>Package</dt>  <dd>APK · sideload</dd>
-        <dt>Requires</dt> <dd>Android 8.0+</dd>
-        <dt>Language</dt> <dd>简体中文</dd>
-        <dt>Licence</dt>  <dd>MIT</dd>
-        <dt>Status</dt>   <dd style="color:var(--magenta)">Alpha</dd>
+        <dt>版本</dt>   <dd id="v-name">0.2.0a</dd>
+        <dt>安装包</dt> <dd>APK · 自行安装</dd>
+        <dt>系统</dt>   <dd>Android 8.0 及以上</dd>
+        <dt>语言</dt>   <dd>简体中文</dd>
+        <dt>许可</dt>   <dd>MIT</dd>
+        <dt>状态</dt>   <dd style="color:var(--magenta)">测试版</dd>
       </dl>
       <div class="spec-bar checker"></div>
     </aside>
@@ -483,9 +498,9 @@ section{ padding-block:clamp(3rem,7.5vh,6rem); }
 <section id="claim" style="padding-top:0">
   <div class="wrap">
     <div class="claim rise">
-      <p class="claim-hit">Most assistants sound<br>equally sure of everything.<br><em>This one doesn't.</em></p>
-      <p>Ask a chatbot a question about a medicine and you get a confident paragraph. Ask it again and you may get a different confident paragraph. Nothing in either one tells you which parts came from a health ministry, which came from a forum post, and which the model simply produced because the sentence needed finishing.</p>
-      <p><b>FishBall was built for one person</b> — someone who reads what a screen tells them and acts on it. That single fact set every rule in it: if the app cannot show where an answer came from, it does not give the answer.</p>
+      <p class="claim-hit">大多数助手<br>对什么都一样笃定。<br><em>这个不是。</em></p>
+      <p>问聊天机器人一个关于药的问题，它会给你一段很有把握的话；再问一次，可能是另一段同样有把握的话。这两段话里，哪句来自卫生部门、哪句来自论坛帖子、哪句只是模型为了把句子写完编出来的——没有任何地方告诉你。</p>
+      <p><b>鱼丸是为一个人做的</b>——一个会把屏幕上的话当真、照着去做的人。这一件事定下了它所有的规矩：说不出答案是从哪儿来的，就不给这个答案。</p>
     </div>
   </div>
 </section>
@@ -494,36 +509,36 @@ section{ padding-block:clamp(3rem,7.5vh,6rem); }
 <section id="how">
   <div class="wrap">
     <div class="sheet-head rise">
-      <div class="mono idx">01 / How it answers</div>
-      <h2>Four rules it will not break</h2>
-      <p class="note">Not tone-of-voice guidelines. Each one is enforced in code, and each one can make the app refuse to answer.</p>
+      <div class="mono idx">01 / 它怎么回答</div>
+      <h2>四条不会破的规矩</h2>
+      <p class="note">不是语气上的要求。每一条都写在代码里，每一条都可能让它拒绝回答。</p>
     </div>
 
     <div class="grid4">
       <article class="card shell rise">
         <span class="n mono">01</span>
-        <h3>Every source is graded</h3>
-        <p>Before a word is written, each result is placed on a four-step ladder — from a national health authority down to an anonymous post. <span class="k">The grade is decided by who published it</span>, not by how convincing it sounds.</p>
-        <p>The grade changes the answer's wording. A claim resting on one forum thread is never phrased with the confidence of one resting on a regulator.</p>
+        <h3>每个来源都有等级</h3>
+        <p>在写下第一个字之前，每条查到的资料都会被放到四级的梯子上——从国家级的监管部门，到匿名的帖子。<span class="k">等级由是谁发布的决定</span>，而不是看它说得多像那么回事。</p>
+        <p>等级会改变答案的措辞。只靠一条论坛帖子撑着的说法，永远不会用引用监管部门那种口气来说。</p>
       </article>
 
       <article class="card shell rise">
         <span class="n mono">02</span>
-        <h3>The source is named in the sentence</h3>
-        <p>Not a footnote, not a superscript number — the name sits in the line you are reading: <em>"the drug regulator's own leaflet says…"</em>. <span class="k">Attribution you have to go looking for is attribution nobody checks.</span></p>
+        <h3>来源就写在句子里</h3>
+        <p>不是脚注，不是右上角的小数字——来源的名字就在你正在读的那一行里：<em>「药监局的说明书写着……」</em>。<span class="k">要翻到别处才看得到的出处，是没人会去核对的出处。</span></p>
       </article>
 
       <article class="card shell rise">
         <span class="n mono">03</span>
-        <h3>Quotes are cut, not written</h3>
-        <p>When the app shows you a source's exact words, the model does not type them out. It points at a span, and that span is <span class="k">sliced out of the retrieved page and verified character by character</span> before you see it.</p>
-        <p>A quotation that does not match the page is rejected and the model is told to try again. There is no path through the code that lets an invented quote reach the screen.</p>
+        <h3>引文是剪出来的，不是写出来的</h3>
+        <p>当它给你看来源的原话时，模型不是把那段话打出来。它只指出一段，这一段会<span class="k">从抓回来的页面上原样切下来，逐字核对</span>，之后才会出现在屏幕上。</p>
+        <p>跟页面对不上的引文会被退回，模型得重新挑。代码里没有任何一条路，能让编出来的引文走到屏幕上。</p>
       </article>
 
       <article class="card shell rise">
         <span class="n mono">04</span>
-        <h3>It argues with itself first</h3>
-        <p>On anything that matters, the app runs a second search designed to <span class="k">disprove what the first one found</span>. If the two disagree, it says so and shows both — rather than quietly keeping whichever it happened to read first.</p>
+        <h3>先跟自己吵一架</h3>
+        <p>但凡是要紧的事，它会再搜一轮，专门<span class="k">找跟第一轮相反的说法</span>。两边对不上，它会说出来，把两边都给你看——而不是悄悄留下先读到的那一个。</p>
       </article>
     </div>
   </div>
@@ -533,44 +548,44 @@ section{ padding-block:clamp(3rem,7.5vh,6rem); }
 <section id="tiers">
   <div class="wrap">
     <div class="sheet-head rise">
-      <div class="mono idx">02 / The ladder</div>
-      <h2>What counts as a source</h2>
-      <p class="note">Every result lands on one of four rungs. The rung is visible under the answer, so you never have to take the app's word for how sure it should be.</p>
+      <div class="mono idx">02 / 等级</div>
+      <h2>什么算是来源</h2>
+      <p class="note">每条资料都落在四级里的一级上。等级就显示在答案下面，它该有多大把握，不用你去猜。</p>
     </div>
 
     <div class="ladder rise">
       <div class="rung" data-fill="4" style="--tier:#101010">
         <span class="meter" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
         <span>
-          <span class="name">Authoritative</span>
-          <span class="what">Regulators, health ministries, standards bodies, primary research. The publisher is accountable for being wrong.</span>
+          <span class="name">权威<small>Authoritative</small></span>
+          <span class="what">监管部门、卫生主管机关、标准组织、原始研究。说错了，发布它的机构要负责。</span>
         </span>
       </div>
       <div class="rung" data-fill="3" style="--tier:#560e2f">
         <span class="meter" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
         <span>
-          <span class="name">Institutional</span>
-          <span class="what">Established news desks, hospitals, universities, encyclopaedias. Edited by somebody, corrected when wrong.</span>
+          <span class="name">高<small>Institutional</small></span>
+          <span class="what">正规的新闻编辑部、医院、大学、百科全书。有人编辑，错了会更正。</span>
         </span>
       </div>
       <div class="rung" data-fill="2" style="--tier:#ac0c4e">
         <span class="meter" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
         <span>
-          <span class="name">Personal</span>
-          <span class="what">A named individual writing under their own name — a doctor's column, a specialist's blog. One person's judgement, and it says so.</span>
+          <span class="name">中<small>Personal</small></span>
+          <span class="what">署真名写东西的个人——医生的专栏、专家的博客。一个人的判断，而且它自己也这么说。</span>
         </span>
       </div>
       <div class="rung" data-fill="1" style="--tier:#ec0a6e">
         <span class="meter" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
         <span>
-          <span class="name">Low</span>
-          <span class="what">Forums, aggregators, content farms, anything unsigned. Usable as a lead, never as the reason for an answer.</span>
+          <span class="name">低<small>Low</small></span>
+          <span class="what">论坛、聚合站、内容农场、任何没有署名的东西。可以当线索，不能当答案的依据。</span>
         </span>
       </div>
     </div>
 
     <div class="note-strip rise">
-      <b>When there is nothing good enough, it says so.</b> If the search service is unreachable, or nothing above the bottom rung turns up, FishBall does not fall back on what the model happens to remember. It tells you it could not find out — because an unsourced answer looks exactly like a good one minus a citation nobody was going to read.
+      <b>没有足够好的资料，它会直说。</b> 搜索服务连不上，或者查到的全在最低一级，鱼丸不会拿模型碰巧记得的东西来凑数。它会告诉你没查到——因为一个没有来源的答案，跟一个好答案看起来一模一样，只是少了一条反正没人会去读的引用。
     </div>
   </div>
 </section>
@@ -579,14 +594,14 @@ section{ padding-block:clamp(3rem,7.5vh,6rem); }
 <section id="look">
   <div class="wrap">
     <div class="sheet-head rise">
-      <div class="mono idx">03 / On the phone</div>
-      <h2>What lands on screen</h2>
-      <p class="note">The app speaks Chinese; the shape of an answer is the point here. Source cards sit under every factual reply, each one tappable through to the page it came from.</p>
+      <div class="mono idx">03 / 手机上</div>
+      <h2>屏幕上长什么样</h2>
+      <p class="note">每一个事实性的回答下面都有来源卡片，点一下就能打开它出自的那一页。</p>
     </div>
 
     <div class="phone shell screws rise" style="max-width:620px">
       <div class="phone-lip">
-        <span class="mono">Fishball · thread</span>
+        <span class="mono">鱼丸 · 对话</span>
         <span class="mono">14:32</span>
       </div>
 
@@ -596,29 +611,29 @@ section{ padding-block:clamp(3rem,7.5vh,6rem); }
         会，最常见的副作用就在胃肠道 —— <span class="cite">国家药品监督管理局</span>的说明书把恶心、胃烧灼感、消化不良列在第一位，严重时可能发展成溃疡甚至出血。
         <div class="source">
           <span class="ico" aria-hidden="true">NMPA</span>
-          <span class="who">国家药品监督管理局<small>nmpa.gov.cn · the drug regulator</small></span>
-          <span class="grade">Authoritative</span>
+          <span class="who">国家药品监督管理局<small>nmpa.gov.cn · 药品监管部门</small></span>
+          <span class="grade">权威</span>
         </div>
         <div class="source">
           <span class="ico" aria-hidden="true">WIKI</span>
-          <span class="who">维基百科<small>wikipedia.org · encyclopaedia</small></span>
-          <span class="grade" style="background:#560e2f">Institutional</span>
+          <span class="who">维基百科<small>wikipedia.org · 百科全书</small></span>
+          <span class="grade" style="background:#560e2f">高</span>
         </div>
       </div>
     </div>
 
     <div class="grid4" style="margin-top:clamp(1.5rem,3.5vw,2.5rem)">
       <article class="card shell rise">
-        <span class="n mono">Memory</span>
-        <h3>It remembers, on the phone</h3>
-        <p>What it looks up, and what you tell it about yourself, are kept on the device — never on a server. Facts carry an expiry: a phone's battery capacity keeps, this week's exchange rate does not.</p>
-        <p>Tell it something has changed and it <span class="k">finds the old note and retires it</span> rather than holding two answers to one question.</p>
+        <span class="n mono">记忆</span>
+        <h3>它记在手机上</h3>
+        <p>它查过的东西、你告诉它的关于你自己的事，都存在手机上——不会上传到服务器。每条记忆都有保质期：手机电池多大能一直记着，这周的汇率不能。</p>
+        <p>告诉它某件事变了，它会<span class="k">找到旧的那条，把它作废</span>，而不是对同一个问题留着两个答案。</p>
       </article>
 
       <article class="card shell rise">
-        <span class="n mono">Private</span>
-        <h3>Your own search index</h3>
-        <p>Searches run through a private <a href="https://docs.searxng.org" target="_blank" rel="noopener" style="color:var(--magenta);text-decoration:none;border-bottom:1px solid var(--magenta-lo)">SearXNG</a> instance rather than a commercial API, and the model is reached through <a href="../../#works" style="color:var(--magenta);text-decoration:none;border-bottom:1px solid var(--magenta-lo)">Hydrogen</a>, a proxy on the same infrastructure. No advertising profile is built, because there is nobody in the chain whose business that is.</p>
+        <span class="n mono">私密</span>
+        <h3>你自己的搜索</h3>
+        <p>搜索走的是自建的 <a href="https://docs.searxng.org" target="_blank" rel="noopener" style="color:var(--magenta);text-decoration:none;border-bottom:1px solid var(--magenta-lo)">SearXNG</a> 实例，不是商业接口；模型通过同一套基础设施上的 <a href="../../#works" style="color:var(--magenta);text-decoration:none;border-bottom:1px solid var(--magenta-lo)">Hydrogen</a> 代理访问。没有人给你建广告画像，因为这条链上没有谁是靠这个挣钱的。</p>
       </article>
     </div>
   </div>
@@ -628,38 +643,38 @@ section{ padding-block:clamp(3rem,7.5vh,6rem); }
 <section id="get">
   <div class="wrap">
     <div class="sheet-head rise">
-      <div class="mono idx">04 / Install</div>
-      <h2>Getting it on a phone</h2>
-      <p class="note">Not on Google Play. It is an APK you install yourself, and it needs an activation code that is handed over in person.</p>
+      <div class="mono idx">04 / 安装</div>
+      <h2>装到手机上</h2>
+      <p class="note">不在应用商店里。它是一个你自己安装的 APK，还需要一个当面交给你的激活码。</p>
     </div>
 
     <div class="get rise">
       <div class="get-copy">
-        <h3>Four steps<br>and a code</h3>
-        <p>The download is a signed APK, around 2 MB. Android will ask twice — once for permission to install from this source, once to confirm the install itself. Both are normal for an app that does not come from a store.</p>
+        <h3>四步，<br>加一个码</h3>
+        <p>下载的是一个签过名的 APK，两兆左右。安卓会问你两次——一次是允不允许从这里安装，一次是确认安装。不是从商店来的应用都会这样，正常的。</p>
         <ol class="steps">
-          <li>Download the installer and open it. Android will ask whether to allow installs from your browser or file manager — allow it, then come back.</li>
-          <li>Confirm the install. The app appears as <b>FishBall</b>.</li>
-          <li>Open it and enter your activation code. There is nothing else to set up — no account, no email, no password.</li>
-          <li>Ask it something. The first answer takes twenty to forty seconds, because it is reading sources rather than reciting.</li>
+          <li>下载安装包，打开它。安卓会问要不要允许浏览器或文件管理器安装应用——允许，然后回来。</li>
+          <li>确认安装。装好以后，应用叫 <b>鱼丸AI</b>。</li>
+          <li>打开，输入你的激活码。别的什么都不用设——没有账号，没有邮箱，没有密码。</li>
+          <li>问它点什么。第一个答案要等二十到四十秒，因为它是在读资料，不是在背。</li>
         </ol>
         <div class="actions">
           <a class="btn solid" href="https://github.com/Arrosam/fishball/releases/download/v0.2.0a/fishball-0.2.0a.apk">
-            Download · <span id="v-btn">0.2.0a</span>
+            下载 · <span id="v-btn">0.2.0a</span>
             <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 1v8M3 6.5 6 9.5 9 6.5M2 11h8"/></svg>
           </a>
-          <a class="btn ghost" href="https://github.com/Arrosam/fishball/releases" target="_blank" rel="noopener">All releases</a>
+          <a class="btn ghost" href="https://github.com/Arrosam/fishball/releases" target="_blank" rel="noopener">所有版本</a>
         </div>
       </div>
       <div class="get-tile checker coarse" aria-hidden="true"></div>
     </div>
 
     <div class="note-strip rise">
-      <b>Updates come to you.</b> FishBall checks this page's release manifest when it starts. When a newer build is published it says so on screen, downloads it on one tap, and hands it to Android to install — so nobody has to remember to come back here.
+      <b>更新会自己来。</b> 鱼丸每次启动都会看一眼这个网站的版本清单。有新版本时它会在屏幕上说，点一下就下载，然后交给安卓安装——不用记着回这里来。设置里也有「检查更新」，随时可以自己看。
     </div>
 
     <div class="note-strip rise" style="border-left-color:var(--ink-40)">
-      <b>Alpha, honestly.</b> It works end to end and it is used daily, but it has had one pair of hands on it. Expect rough edges, and expect the answer to be slower than you are used to — that is the sourcing, and it is the entire point.
+      <b>说实话，还是测试版。</b> 它从头到尾都能用，也天天在用，但用过它的只有一双手。会有粗糙的地方，答案也会比你习惯的慢——慢在查来源上，而那正是它的全部意义。
     </div>
   </div>
 </section>
@@ -671,14 +686,15 @@ section{ padding-block:clamp(3rem,7.5vh,6rem); }
       <p class="band-mark">Fishb<span>a</span>ll</p>
       <nav class="band-links">
         <a href="../../">areel.org</a>
-        <a href="https://github.com/Arrosam/fishball" target="_blank" rel="noopener">Source</a>
-        <a href="https://github.com/Arrosam/fishball/releases" target="_blank" rel="noopener">Releases</a>
+        <a href="https://github.com/Arrosam/fishball" target="_blank" rel="noopener">源码</a>
+        <a href="https://github.com/Arrosam/fishball/releases" target="_blank" rel="noopener">版本记录</a>
         <a href="../../#works">Hydrogen</a>
+        <a href="../en/" lang="en" hreflang="en">English</a>
       </nav>
     </div>
     <div class="band-bot mono">
       <span>© 2026 W.L. · areel.org/fishball</span>
-      <span>MIT · an areel.org work</span>
+      <span>MIT · areel.org 出品</span>
     </div>
   </div>
 </footer>
@@ -722,16 +738,9 @@ section{ padding-block:clamp(3rem,7.5vh,6rem); }
   }, { passive: true });
 })();
 
-// The version and the download, read from the same manifest the app reads.
-//
-// One source of truth: publishing a release updates latest.json, and this page follows without
-// being edited. If the fetch fails the hardcoded number and link stay, which is the version
-// that was current when the page was written — stale, but never blank or wrong-looking.
-//
-// The link follows the manifest's `url` because the file it points at carries the version in
-// its name (fishball-0.2.0a.apk), so what lands in somebody's Downloads folder says which build
-// it is. The old unversioned name is still attached to every release for anyone holding the
-// releases/latest link.
+// The version and the download, read from the same manifest the app reads. Same script as
+// the English page: one source of truth, and the hardcoded number and link are only the
+// fallback for a failed fetch.
 (function () {
   fetch('../latest.json', { cache: 'no-cache' })
     .then(function (r) { return r.ok ? r.json() : null; })

@@ -5,13 +5,16 @@
 <!--
   Language stub.
 
-  The page itself lives under /en. This exists so that areel.org/fishball resolves rather than
-  404s, and so that the localised versions to come can be reached by adding a directory beside
-  /en without moving the English one. Redirect rather than a copy: two files with the same
-  content is one file that will go stale.
+  The page lives under /en and /zh. This exists so that areel.org/fishball resolves rather
+  than 404s, and sends the browser to whichever it reads: a Chinese-language browser goes to
+  /zh, everything else to /en. Redirect rather than a copy: two files with the same content
+  is one file that will go stale. Without script the meta refresh takes them to English, and
+  the line below offers both.
 -->
-<meta http-equiv="refresh" content="0; url=en/">
+<meta http-equiv="refresh" content="1; url=en/">
 <link rel="canonical" href="https://areel.org/fishball/en/">
+<link rel="alternate" hreflang="en" href="https://areel.org/fishball/en/">
+<link rel="alternate" hreflang="zh" href="https://areel.org/fishball/zh/">
 <title>FishBall</title>
 <style>
   body{margin:0;min-height:100vh;display:grid;place-items:center;background:#c9c9c5;color:#101010;
@@ -21,7 +24,7 @@
 </style>
 </head>
 <body>
-  <p>FishBall — <a href="en/">continue in English</a></p>
-  <script>location.replace('en/');</script>
+  <p>FishBall — <a href="zh/">中文</a> · <a href="en/">English</a></p>
+  <script>location.replace(/^zh\b/i.test(navigator.language || '') ? 'zh/' : 'en/');</script>
 </body>
 </html>
