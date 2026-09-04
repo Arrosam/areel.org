@@ -18,6 +18,7 @@ and each page carries its own copy of the design tokens.
 | `hydrogen/` | Language stub — redirects to `hydrogen/en/` |
 | `hydrogen/en/` | Hydrogen's official site, in English |
 | `hydrogen/zh/` | Hydrogen's official site, in Chinese |
+| `hydrogen/favicon.svg` | Hydrogen's own mark — a copy of the app's `web/public/favicon.svg` |
 
 ### `index.html`
 
@@ -60,6 +61,14 @@ Each unit with a site has a language stub — `fishball/`, `hydrogen/` — that 
 
 Design follows the *AREEL* album cover: flat concrete grey, one magenta sweep,
 CAD hairlines visible through clear-plastic panels, checkerboard, near-black band.
+FishBall's site shares that language, because the app is built to it.
+
+**Hydrogen's site is the exception.** It is built to Hydrogen's own design language — the
+dashboard's dark ink palette and cyan→teal brand pair, Inter, rounded cards on hairline borders,
+Bootstrap Icons, and the emission-line spectrum its brand mark is cut from. The tokens are the
+app's Tailwind theme (`web/tailwind.config.js`, `web/src/index.css`) copied verbatim, and the hero
+is the README hero (`docs/images/hero.svg`) set as a page. When the app's theme changes, change
+these pages to match; the only link back to areel.org's own language is the footer.
 
 ## Local preview
 
