@@ -441,7 +441,7 @@ section{ padding-block:clamp(3rem,7.5vh,6rem); }
     <div>
       <p class="lede">A search agent for Android that <b>names where every answer came from</b>, quotes the source in its own words, and tells you plainly when it found nothing worth trusting.</p>
       <div class="actions">
-        <a class="btn solid" href="https://github.com/Arrosam/fishball/releases/latest/download/fishball.apk">
+        <a class="btn solid" href="https://github.com/Arrosam/fishball/releases/download/v0.2.0a/fishball-0.2.0a.apk">
           Download the installer
           <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 1v8M3 6.5 6 9.5 9 6.5M2 11h8"/></svg>
         </a>
@@ -631,7 +631,7 @@ section{ padding-block:clamp(3rem,7.5vh,6rem); }
           <li>Ask it something. The first answer takes twenty to forty seconds, because it is reading sources rather than reciting.</li>
         </ol>
         <div class="actions">
-          <a class="btn solid" href="https://github.com/Arrosam/fishball/releases/latest/download/fishball.apk">
+          <a class="btn solid" href="https://github.com/Arrosam/fishball/releases/download/v0.2.0a/fishball-0.2.0a.apk">
             Download · <span id="v-btn">0.2.0</span>
             <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 1v8M3 6.5 6 9.5 9 6.5M2 11h8"/></svg>
           </a>
@@ -709,11 +709,16 @@ section{ padding-block:clamp(3rem,7.5vh,6rem); }
   }, { passive: true });
 })();
 
-// The version, read from the same manifest the app reads.
+// The version and the download, read from the same manifest the app reads.
 //
 // One source of truth: publishing a release updates latest.json, and this page follows without
-// being edited. If the fetch fails the hardcoded number stays, which is the version that was
-// current when the page was written — stale, but never blank or wrong-looking.
+// being edited. If the fetch fails the hardcoded number and link stay, which is the version
+// that was current when the page was written — stale, but never blank or wrong-looking.
+//
+// The link follows the manifest's `url` because the file it points at carries the version in
+// its name (fishball-0.2.0a.apk), so what lands in somebody's Downloads folder says which build
+// it is. The old unversioned name is still attached to every release for anyone holding the
+// releases/latest link.
 (function () {
   fetch('../latest.json', { cache: 'no-cache' })
     .then(function (r) { return r.ok ? r.json() : null; })
@@ -723,6 +728,9 @@ section{ padding-block:clamp(3rem,7.5vh,6rem); }
       var btn = document.getElementById('v-btn');
       if (name) name.textContent = j.versionName;
       if (btn) btn.textContent = j.versionName;
+      if (j.url) {
+        document.querySelectorAll('a[href$=".apk"]').forEach(function (a) { a.href = j.url; });
+      }
     })
     .catch(function () {});
 })();

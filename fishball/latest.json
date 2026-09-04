@@ -1,7 +1,7 @@
 {
-  "versionCode": 4,
-  "versionName": "0.2.0",
-  "url": "https://github.com/Arrosam/fishball/releases/latest/download/fishball.apk",
-  "size": 1992173,
-  "notes": "查资料更准了：搜索结果按相关度排过序，一次能看到更多条。\n接着追问不用再查一遍：上一轮查到的资料、想起的记忆，鱼丸都记着。\n答案里的加粗、列表能正常显示了；一次发好几张图也不会被截掉。\n手机是中文的话，图标下面叫「鱼丸AI」。"
+  "versionCode": 5,
+  "versionName": "0.2.0a",
+  "url": "https://github.com/Arrosam/fishball/releases/download/v0.2.0a/fishball-0.2.0a.apk",
+  "size": 1994265,
+  "notes": "设置里能看到版本号了，点「检查更新」就能装新版。\n查资料更准了：搜索结果按相关度排过序，一次能看到更多条。\n接着追问不用再查一遍：上一轮查到的资料、想起的记忆，鱼丸都记着。\n答案里的加粗、列表能正常显示了；一次发好几张图也不会被截掉。"
 }
