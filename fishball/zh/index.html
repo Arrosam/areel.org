@@ -54,7 +54,10 @@
 
   /* Archivo carries the Latin; it has no hanzi, so the system's CJK face carries the rest. */
   --display: "Archivo", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC", "Helvetica Neue", sans-serif;
-  --mono: "JetBrains Mono", ui-monospace, monospace;
+  /* same rule for the mono labels: CJK text in a plain mono stack falls through to the
+     browser's monospace CJK, a serif on Windows. Name real CJK faces before the generic
+     so labels like 鱼丸 · 对话 stay sans. */
+  --mono: "JetBrains Mono", ui-monospace, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC", monospace;
 
   --ease: cubic-bezier(.16,.84,.32,1);
 }
@@ -231,10 +234,14 @@ a{ color:inherit; }
   text-transform:uppercase; white-space:nowrap;
 }
 
-/* the app's own name, beside the Latin wordmark, at the size the launcher shows it */
+/* the app's own name, beside the Latin wordmark, at the size the launcher shows it.
+   Archivo for the letters, the system CJK sans (bold) for the hanzi — the old mono
+   stack sent 鱼丸 to the browser's default monospace CJK, a serif, and it read badly. */
 .cn-name{
   align-self:flex-end; margin-bottom:clamp(.2rem,1vw,.9rem);
-  font-family:var(--mono); font-size:clamp(.75rem,1.4vw,1.1rem); letter-spacing:.18em;
+  font-family:var(--display); font-weight:700;
+  font-variation-settings:"wdth" 116,"wght" 800;
+  font-size:clamp(.8rem,1.5vw,1.2rem); letter-spacing:.12em;
   padding:.35rem .6rem; background:var(--magenta); color:#fff; white-space:nowrap;
 }
 

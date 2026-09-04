@@ -51,7 +51,10 @@
   --maxw: 1360px;
 
   --display: "Archivo", "Helvetica Neue", sans-serif;
-  --mono: "JetBrains Mono", ui-monospace, monospace;
+  /* CJK faces sit in the mono stack before the generic, so any Chinese that lands in a
+     mono label (the sample answer's neighbours, future zh labels) stays sans, not the
+     browser's monospace CJK — a serif on Windows. */
+  --mono: "JetBrains Mono", ui-monospace, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC", monospace;
 
   --ease: cubic-bezier(.16,.84,.32,1);
 }
