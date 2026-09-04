@@ -13,7 +13,11 @@ and each page carries its own copy of the design tokens.
 | `index.html` | The landing page |
 | `fishball/` | Language stub — redirects to `fishball/en/` |
 | `fishball/en/` | FishBall's official site, in English |
+| `fishball/zh/` | FishBall's official site, in Chinese |
 | `fishball/latest.json` | Release manifest. **The app reads this on launch** |
+| `hydrogen/` | Language stub — redirects to `hydrogen/en/` |
+| `hydrogen/en/` | Hydrogen's official site, in English |
+| `hydrogen/zh/` | Hydrogen's official site, in Chinese |
 
 ### `index.html`
 
@@ -51,8 +55,8 @@ To publish an update:
 how an update stops arriving three releases later. The English page reads its version number
 from the same file, so it never has to be edited to match.
 
-The one localised page is `fishball/en/`. Translations go beside it — `fishball/zh/` and so
-on — and the stub at `fishball/` is what picks between them.
+Each unit with a site has a language stub — `fishball/`, `hydrogen/` — that picks between
+`en/` and `zh/` by browser language, with both offered on the stub itself.
 
 Design follows the *AREEL* album cover: flat concrete grey, one magenta sweep,
 CAD hairlines visible through clear-plastic panels, checkerboard, near-black band.
