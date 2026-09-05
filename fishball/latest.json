@@ -1,7 +1,7 @@
 {
-  "versionCode": 5,
-  "versionName": "0.2.0a",
-  "url": "https://github.com/Arrosam/fishball/releases/download/v0.2.0a/fishball-0.2.0a.apk",
-  "size": 1994265,
-  "notes": "设置里能看到版本号了，点「检查更新」就能装新版。\n查资料更准了：搜索结果按相关度排过序，一次能看到更多条。\n接着追问不用再查一遍：上一轮查到的资料、想起的记忆，鱼丸都记着。\n答案里的加粗、列表能正常显示了；一次发好几张图也不会被截掉。"
+  "versionCode": 6,
+  "versionName": "0.2.1a",
+  "url": "https://github.com/Arrosam/fishball/releases/download/v0.2.1a/fishball-0.2.1a.apk",
+  "size": 1999029,
+  "notes": "国内用户现在可以用 CN- 开头的激活码，连国内的服务器，比绕一圈快不少。\n复杂问题不会再答到一半断掉了——以前想得久一点的问题会跳「现在连不上」，其实答案早就出来了。\n鱼丸重新想得起以前查过的东西：之前有个毛病会让它把记住的资料整批丢掉。\n答案要是没传完，现在会直说，不会把半截答案当完整的给你。"
 }
