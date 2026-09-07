@@ -1,7 +1,7 @@
 {
-  "versionCode": 8,
-  "versionName": "0.3.0a",
-  "url": "https://github.com/Arrosam/fishball/releases/download/v0.3.0a/fishball-0.3.0a.apk",
-  "size": 2016893,
-  "notes": "现在可以在鱼丸工作的过程中插话了，让鱼丸一口气帮你查完，不用等到前面的问题回答完。\n退到后台、或者被系统杀掉之后，没答完的问题会自己接着答。\n查过什么、看过哪些网页、中间怎么想的，现在都留在对话里，不会答完就没了。\n鱼丸忙的时候语音键不再被占住。\n不会再对着同一个打不开的网页反复去查。\n聊天记录文件不会只涨不清理了。"
+  "versionCode": 9,
+  "versionName": "0.3.1a",
+  "url": "https://github.com/Arrosam/fishball/releases/download/v0.3.1a/fishball-0.3.1a.apk",
+  "size": 2089017,
+  "notes": "增加了鱼丸在聊天中插入图片的能力\n聊天框下方增加复制和引用按钮"
 }
