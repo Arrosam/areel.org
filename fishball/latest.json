@@ -1,7 +1,7 @@
 {
-  "versionCode": 6,
-  "versionName": "0.2.1a",
-  "url": "https://github.com/Arrosam/fishball/releases/download/v0.2.1a/fishball-0.2.1a.apk",
-  "size": 1999029,
-  "notes": "国内用户现在可以用 CN- 开头的激活码，连国内的服务器，比绕一圈快不少。\n复杂问题不会再答到一半断掉了——以前想得久一点的问题会跳「现在连不上」，其实答案早就出来了。\n鱼丸重新想得起以前查过的东西：之前有个毛病会让它把记住的资料整批丢掉。\n答案要是没传完，现在会直说，不会把半截答案当完整的给你。"
+  "versionCode": 8,
+  "versionName": "0.3.0a",
+  "url": "https://github.com/Arrosam/fishball/releases/download/v0.3.0a/fishball-0.3.0a.apk",
+  "size": 2016893,
+  "notes": "现在可以在鱼丸工作的过程中插话了，让鱼丸一口气帮你查完，不用等到前面的问题回答完。\n退到后台、或者被系统杀掉之后，没答完的问题会自己接着答。\n查过什么、看过哪些网页、中间怎么想的，现在都留在对话里，不会答完就没了。\n鱼丸忙的时候语音键不再被占住。\n不会再对着同一个打不开的网页反复去查。\n聊天记录文件不会只涨不清理了。"
 }
