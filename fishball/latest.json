@@ -1,7 +1,7 @@
 {
-  "versionCode": 9,
-  "versionName": "0.3.1a",
-  "url": "https://github.com/Arrosam/fishball/releases/download/v0.3.1a/fishball-0.3.1a.apk",
-  "size": 2089017,
-  "notes": "增加了鱼丸在聊天中插入图片的能力\n聊天框下方增加复制和引用按钮"
+  "versionCode": 10,
+  "versionName": "0.3.2a",
+  "url": "https://github.com/Arrosam/fishball/releases/download/v0.3.2a/fishball-0.3.2a.apk",
+  "size": 2089985,
+  "notes": "增加了重试按钮，回答失败或中途停下后可以重新发起\n优化了引用功能，引用的内容会随消息一并发送给鱼丸"
 }
