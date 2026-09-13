@@ -1,7 +1,7 @@
 {
-  "versionCode": 11,
-  "versionName": "0.4.0a",
-  "url": "https://github.com/Arrosam/fishball/releases/download/v0.4.0a/fishball-0.4.0a.apk",
+  "versionCode": 12,
+  "versionName": "0.4.1a",
+  "url": "https://github.com/Arrosam/fishball/releases/download/v0.4.1a/fishball-0.4.1a.apk",
   "size": 2125917,
-  "notes": "更新了查看图片详情的功能\n鱼丸可以引用网页链接了\n修复了回到最新按钮的动画错误"
+  "notes": "修复了上下拖动图片时松手就会关闭的问题：拖回原处再松手，图片会回到原位"
 }
