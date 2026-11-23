@@ -232,10 +232,10 @@ a{ color:inherit; }
 
 .swoop{
   position:absolute; z-index:0; pointer-events:none;
-  right:-15vw; top:-15vh; width:min(64vw,780px); height:auto;
+  right:max(-15vw,-185px); top:max(-15vh,-130px); width:min(64vw,780px); height:auto;
 }
-@media (max-width:999px){ .swoop{ right:-24vw; top:-12vh; width:min(80vw,620px); opacity:.92; } }
-@media (max-width:640px){ .swoop{ right:-34vw; top:-17vh; width:118vw; opacity:.85; } }
+@media (max-width:999px){ .swoop{ right:-24vw; top:max(-12vh,-110px); width:min(80vw,620px); opacity:.92; } }
+@media (max-width:640px){ .swoop{ right:-34vw; top:max(-17vh,-110px); width:118vw; opacity:.85; } }
 
 .mark-row{ display:flex; align-items:center; gap:clamp(.75rem,2vw,1.25rem); margin-bottom:clamp(1rem,2.5vw,1.5rem); }
 .fish{ width:clamp(46px,7vw,86px); height:auto; flex:none; }
