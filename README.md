@@ -10,24 +10,27 @@ and each page carries its own copy of the design tokens.
 
 | Path | What it is |
 |---|---|
-| `index.html` | The landing page |
-| `fishball/` | Language stub — redirects to `fishball/en/` |
+| `index.html` | Root language stub — redirects to `zh/` or `en/` (preserving `#hash`) |
+| `en/` | The landing page, in English |
+| `zh/` | The landing page, in Chinese |
+| `fishball/` | Language stub — redirects to `fishball/en/` or `fishball/zh/` |
 | `fishball/en/` | FishBall's official site, in English |
 | `fishball/zh/` | FishBall's official site, in Chinese |
 | `fishball/latest.json` | Release manifest. **The app reads this on launch** |
-| `hydrogen/` | Language stub — redirects to `hydrogen/en/` |
+| `hydrogen/` | Language stub — redirects to `hydrogen/en/` or `hydrogen/zh/` |
 | `hydrogen/en/` | Hydrogen's official site, in English |
 | `hydrogen/zh/` | Hydrogen's official site, in Chinese |
 | `hydrogen/favicon.svg` | Hydrogen's own mark — a copy of the app's `web/public/favicon.svg` |
 
-### `index.html`
+### `en/` and `zh/`
 
 | Section | What it is |
 |---|---|
-| Hero | AREEL wordmark, GitHub link, site spec block |
+| Hero | AREEL wordmark, language switcher, GitHub link, site spec block |
 | Origin | Collapsed to a magenta hairline; expands to the name story + album embed |
-| `01 / Works` | Two units, each in its own card: **Hydrogen** (Micro Agents, the request flow, two use cases) and **FishBall** (source grading, the turn pipeline, two use cases) |
-| `02 / Pending` | Placeholder for what lands next |
+| `01 / Works` | Three units, each in its own card: **Hydrogen** (Micro Agents, request flow, two use cases), **FishBall** (source grading, turn pipeline, two use cases), and **DSH-Fishball** (always-on DSH assistant over MCP + OAuth 2.1, architecture schematic, and its four repositories: `dsh-fishball-bundle`, `dsh-connector`, `dsh-fishball`, `dsh-fishball-instance`) |
+| `02 / DSH Plugins` | Compact three-card shelf for focused DeepSeek Harness plugins (`dsh-smart-prompt`, `dsh-model-quick-selector`, `dsh-better-workspace-file-manager`) |
+| `03 / Pending` | Placeholder for what lands next |
 
 ## FishBall releases
 
