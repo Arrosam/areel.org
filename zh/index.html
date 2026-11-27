@@ -554,7 +554,7 @@ code.inl{
 .uc-flow .arw{ color:rgba(201,201,197,.45); padding-left:.7rem; }
 .uc-flow .hot{ color:var(--magenta); font-weight:700; }
 
-/* 4-repository breakdown inside DSH-Fishball's dark band */
+/* Component breakdown inside DSH-Fishball's dark band */
 .repo-grid{
   display:grid; grid-template-columns:1fr; gap:1px;
   background:rgba(201,201,197,.18); border:1px solid rgba(201,201,197,.18);
@@ -1072,12 +1072,12 @@ body{ line-height:1.75; }
       </div>
     </article>
 
-    <!-- ── UNIT 03: DSH-FISHBALL (4 REPOSITORIES) ── -->
+    <!-- ── UNIT 03: DSH-FISHBALL ── -->
     <article id="dsh-fishball" class="unit shell rise" style="margin-top:clamp(1.75rem,4vw,3rem)">
       <div class="unit-top">
         <div>
           <h2 class="unit-name">
-            <a href="https://github.com/Arrosam/dsh-fishball-bundle" target="_blank" rel="noopener">
+            <a href="https://github.com/Arrosam/dsh-fishball" target="_blank" rel="noopener">
               <svg class="unit-mark" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M7.4 16.6V9.9l3.9-4.3h7.1v7.1l-4.3 3.9zM7.4 16.6 2.6 21.4h4.8z" fill="currentColor"/>
                 <rect class="eye" x="14.6" y="7.4" width="2" height="2"/>
@@ -1089,7 +1089,7 @@ body{ line-height:1.75; }
         <div class="tags">
           <span class="tag hot">V3 Alpha</span>
           <span class="tag">DSH</span>
-          <span class="tag">4 个仓库</span>
+          <span class="tag">源码同库</span>
           <span class="tag">MCP · OAuth 2.1</span>
           <span class="tag">MIT</span>
         </div>
@@ -1109,7 +1109,7 @@ body{ line-height:1.75; }
         </div>
 
         <div>
-          <h3>四个仓库如何协作</h3>
+          <h3>各组件如何协作</h3>
           <div class="schematic">
             <div class="node accent">
               <span class="lbl">统一入口 · 一键内嵌整合包</span>
@@ -1133,48 +1133,58 @@ body{ line-height:1.75; }
           </div>
         </div>
 
-        <div class="usecases">
-          <div class="uc-head mono">四个仓库一览</div>
+        <div class="usecases" id="dsh-fishball-components">
+          <div class="uc-head mono">一个仓库</div>
           <div class="repo-grid">
 
-            <a class="repo-card" href="https://github.com/Arrosam/dsh-fishball-bundle" target="_blank" rel="noopener">
+            <a class="repo-card" href="https://github.com/Arrosam/dsh-fishball" target="_blank" rel="noopener" style="grid-column:1 / -1">
               <div class="repo-top">
-                <span class="repo-role mono">01 · 推荐入口</span>
+                <span class="repo-role mono">01 · 推荐入口 · 仓库根目录</span>
                 <svg class="repo-arr" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10 10 2M4 2h6v6"/></svg>
               </div>
               <h4 class="repo-name">dsh-fishball-bundle</h4>
-              <p class="repo-desc">面向普通用户的主入口仓库。提供一键内嵌整合包（内置 instance、connector、adapter 与 watchdog），同时包含独立部署与外部 MCP 接入指南。</p>
+              <p class="repo-desc">一键安装内嵌版，也提供独立部署与外部 MCP 接入指南。</p>
               <div class="repo-pkgs">npm · dsh-fishball-bundle</div>
             </a>
 
-            <a class="repo-card" href="https://github.com/Arrosam/dsh-connector" target="_blank" rel="noopener">
+            <a class="repo-card" href="https://github.com/Arrosam/dsh-fishball/tree/main/dsh-connector" target="_blank" rel="noopener">
               <div class="repo-top">
                 <span class="repo-role mono">02 · 被管侧连接器</span>
                 <svg class="repo-arr" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10 10 2M4 2h6v6"/></svg>
               </div>
               <h4 class="repo-name">dsh-connector</h4>
-              <p class="repo-desc">通用的 DSH MCP + OAuth 2.1 连接器插件，提供会话移交/收回（Hand over / Take back）、侧栏入口 UI、跨 DSH 适配器与按目标自动审权的 Watchdog。</p>
-              <div class="repo-pkgs">npm · dsh-agent-connector · dsh-connector-amenities</div>
+              <p class="repo-desc">通过 MCP + OAuth 2.1 开放 DSH 会话，提供会话移交/收回与侧栏界面，可选装适配器连接另一套 DSH。</p>
+              <div class="repo-pkgs">npm · dsh-agent-connector · dsh-connector-adapter · dsh-connector-shared</div>
             </a>
 
-            <a class="repo-card" href="https://github.com/Arrosam/dsh-fishball" target="_blank" rel="noopener">
+            <a class="repo-card" href="https://github.com/Arrosam/dsh-fishball/tree/main/dsh-fishball" target="_blank" rel="noopener">
               <div class="repo-top">
                 <span class="repo-role mono">03 · 助手运行时</span>
                 <svg class="repo-arr" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10 10 2M4 2h6v6"/></svg>
               </div>
               <h4 class="repo-name">dsh-fishball</h4>
-              <p class="repo-desc">Fishball 侧插件集，把一个 DSH 变成单会话总管助手——内置人设、私有 Skills、配对界面，以及工作看板、空闲缓存心跳与任务面板等可选组件。</p>
-              <div class="repo-pkgs">npm · fishball-core · fishball-amenities</div>
+              <p class="repo-desc">让一条 DSH 会话成为常驻总管助手，内置人设、私有 Skills 和配对界面。</p>
+              <div class="repo-pkgs">npm · fishball-core · fishball-shared</div>
             </a>
 
-            <a class="repo-card" href="https://github.com/Arrosam/dsh-fishball-instance" target="_blank" rel="noopener">
+            <a class="repo-card" href="https://github.com/Arrosam/dsh-fishball/tree/main/dsh-fishball-instance" target="_blank" rel="noopener">
               <div class="repo-top">
                 <span class="repo-role mono">04 · 子实例托管桥</span>
                 <svg class="repo-arr" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10 10 2M4 2h6v6"/></svg>
               </div>
               <h4 class="repo-name">dsh-fishball-instance</h4>
-              <p class="repo-desc">在主 DSH 内托管运行隔离的 Fishball 子实例（<code class="inl" style="color:var(--concrete);background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.14)">&lt;DSH_HOME&gt;/fishball/runtime</code>），自动同步 API-Key 模型配置、签发连接令牌并提供完整清理脚本。</p>
+              <p class="repo-desc">在隔离的子 DSH 中运行 Fishball，同步 API-Key 模型配置并签发连接令牌。</p>
               <div class="repo-pkgs">npm · dsh-instance</div>
+            </a>
+
+            <a class="repo-card" href="https://github.com/Arrosam/dsh-fishball/tree/main/amenities" target="_blank" rel="noopener">
+              <div class="repo-top">
+                <span class="repo-role mono">05 · 可选组件</span>
+                <svg class="repo-arr" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10 10 2M4 2h6v6"/></svg>
+              </div>
+              <h4 class="repo-name">amenities</h4>
+              <p class="repo-desc">两套整合包为 Fishball 与被管 DSH 提供可选组件：工作看板、缓存心跳、任务面板、顾问与 Watchdog。</p>
+              <div class="repo-pkgs">npm · fishball-amenities · dsh-connector-amenities · fishball-board · fishball-heartbeat · fishball-taskboard · fishball-consultant · dsh-connector-watchdog</div>
             </a>
 
           </div>
@@ -1182,13 +1192,10 @@ body{ line-height:1.75; }
       </div>
 
       <div class="actions">
-        <a class="btn solid" href="https://github.com/Arrosam/dsh-fishball-bundle" target="_blank" rel="noopener">
+        <a class="btn solid" href="https://github.com/Arrosam/dsh-fishball" target="_blank" rel="noopener">
           从 bundle 一键安装
           <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 10 10 2M4 2h6v6"/></svg>
         </a>
-        <a class="btn ghost" href="https://github.com/Arrosam/dsh-connector" target="_blank" rel="noopener">dsh-connector</a>
-        <a class="btn ghost" href="https://github.com/Arrosam/dsh-fishball" target="_blank" rel="noopener">dsh-fishball</a>
-        <a class="btn ghost" href="https://github.com/Arrosam/dsh-fishball-instance" target="_blank" rel="noopener">dsh-fishball-instance</a>
       </div>
     </article>
   </div>

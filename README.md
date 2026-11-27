@@ -28,7 +28,7 @@ and each page carries its own copy of the design tokens.
 |---|---|
 | Hero | AREEL wordmark, language switcher, GitHub link, site spec block |
 | Origin | Collapsed to a magenta hairline; expands to the name story + album embed |
-| `01 / Works` | Three units, each in its own card: **Hydrogen** (Micro Agents, request flow, two use cases), **FishBall** (source grading, turn pipeline, two use cases), and **DSH-Fishball** (always-on DSH assistant over MCP + OAuth 2.1, architecture schematic, and its four repositories: `dsh-fishball-bundle`, `dsh-connector`, `dsh-fishball`, `dsh-fishball-instance`) |
+| `01 / Works` | Three units, each in its own card: **Hydrogen** (Micro Agents, request flow, two use cases), **FishBall** (source grading, turn pipeline, two use cases), and **DSH-Fishball** (always-on DSH assistant over MCP + OAuth 2.1, architecture schematic, and a component map for the [`dsh-fishball` monorepo](https://github.com/Arrosam/dsh-fishball): the root is the one-click install entry (`dsh-fishball-bundle`), with `dsh-connector/`, `dsh-fishball/`, `dsh-fishball-instance/`, and `amenities/` alongside it. The npm packages keep their names and are published separately) |
 | `02 / DSH Plugins` | Compact three-card shelf for focused DeepSeek Harness plugins (`dsh-smart-prompt`, `dsh-model-quick-selector`, `dsh-better-workspace-file-manager`) |
 | `03 / Pending` | Placeholder for what lands next |
 

@@ -590,7 +590,7 @@ code.inl{
 .uc-flow .arw{ color:rgba(201,201,197,.42); padding-left:.7rem; }
 .uc-flow .hot{ color:var(--magenta); font-weight:700; }
 
-/* 4-repository breakdown inside DSH-Fishball's dark band */
+/* Component breakdown inside DSH-Fishball's dark band */
 .repo-grid{
   display:grid; grid-template-columns:1fr; gap:1px;
   background:rgba(201,201,197,.18); border:1px solid rgba(201,201,197,.18);
@@ -1103,12 +1103,12 @@ section{ padding-block:clamp(3.5rem,9vh,7rem); }
       </div>
     </article>
 
-    <!-- ── UNIT 03: DSH-FISHBALL (4 REPOSITORIES) ── -->
+    <!-- ── UNIT 03: DSH-FISHBALL ── -->
     <article id="dsh-fishball" class="unit shell rise" style="margin-top:clamp(1.75rem,4vw,3rem)">
       <div class="unit-top">
         <div>
           <h2 class="unit-name">
-            <a href="https://github.com/Arrosam/dsh-fishball-bundle" target="_blank" rel="noopener">
+            <a href="https://github.com/Arrosam/dsh-fishball" target="_blank" rel="noopener">
               <svg class="unit-mark" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M7.4 16.6V9.9l3.9-4.3h7.1v7.1l-4.3 3.9zM7.4 16.6 2.6 21.4h4.8z" fill="currentColor"/>
                 <rect class="eye" x="14.6" y="7.4" width="2" height="2"/>
@@ -1120,7 +1120,7 @@ section{ padding-block:clamp(3.5rem,9vh,7rem); }
         <div class="tags">
           <span class="tag hot">V3 Alpha</span>
           <span class="tag">DSH</span>
-          <span class="tag">4 Repos</span>
+          <span class="tag">Monorepo</span>
           <span class="tag">MCP · OAuth 2.1</span>
           <span class="tag">MIT</span>
         </div>
@@ -1140,7 +1140,7 @@ section{ padding-block:clamp(3.5rem,9vh,7rem); }
         </div>
 
         <div>
-          <h3>How the four repos fit</h3>
+          <h3>How the components fit</h3>
           <div class="schematic">
             <div class="node accent">
               <span class="lbl">Entry · All-in-one bundle</span>
@@ -1164,48 +1164,58 @@ section{ padding-block:clamp(3.5rem,9vh,7rem); }
           </div>
         </div>
 
-        <div class="usecases">
-          <div class="uc-head mono">Four repositories</div>
+        <div class="usecases" id="dsh-fishball-components">
+          <div class="uc-head mono">One repository</div>
           <div class="repo-grid">
 
-            <a class="repo-card" href="https://github.com/Arrosam/dsh-fishball-bundle" target="_blank" rel="noopener">
+            <a class="repo-card" href="https://github.com/Arrosam/dsh-fishball" target="_blank" rel="noopener" style="grid-column:1 / -1">
               <div class="repo-top">
-                <span class="repo-role mono">01 · Start here</span>
+                <span class="repo-role mono">01 · Start here · Repository root</span>
                 <svg class="repo-arr" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10 10 2M4 2h6v6"/></svg>
               </div>
               <h4 class="repo-name">dsh-fishball-bundle</h4>
-              <p class="repo-desc">Main user entry point. One-click embedded bundle combining instance launcher, connector, cross-DSH adapter, and watchdog, plus standalone &amp; MCP integration guides.</p>
+              <p class="repo-desc">One-click embedded install, plus guides for standalone setup and external MCP integration.</p>
               <div class="repo-pkgs">npm · dsh-fishball-bundle</div>
             </a>
 
-            <a class="repo-card" href="https://github.com/Arrosam/dsh-connector" target="_blank" rel="noopener">
+            <a class="repo-card" href="https://github.com/Arrosam/dsh-fishball/tree/main/dsh-connector" target="_blank" rel="noopener">
               <div class="repo-top">
                 <span class="repo-role mono">02 · Managed DSH</span>
                 <svg class="repo-arr" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10 10 2M4 2h6v6"/></svg>
               </div>
               <h4 class="repo-name">dsh-connector</h4>
-              <p class="repo-desc">Generic MCP + OAuth 2.1 connector for DSH. Adds Hand over / Take back session controls, sidebar window UI, cross-DSH adapter, and goal-scoped Watchdog.</p>
-              <div class="repo-pkgs">npm · dsh-agent-connector · dsh-connector-amenities</div>
+              <p class="repo-desc">Exposes DSH sessions over MCP + OAuth 2.1, with Hand over / Take back controls, a sidebar UI, and an optional adapter for connecting to another DSH.</p>
+              <div class="repo-pkgs">npm · dsh-agent-connector · dsh-connector-adapter · dsh-connector-shared</div>
             </a>
 
-            <a class="repo-card" href="https://github.com/Arrosam/dsh-fishball" target="_blank" rel="noopener">
+            <a class="repo-card" href="https://github.com/Arrosam/dsh-fishball/tree/main/dsh-fishball" target="_blank" rel="noopener">
               <div class="repo-top">
                 <span class="repo-role mono">03 · Assistant runtime</span>
                 <svg class="repo-arr" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10 10 2M4 2h6v6"/></svg>
               </div>
               <h4 class="repo-name">dsh-fishball</h4>
-              <p class="repo-desc">Fishball-side packages that turn a DSH into the manager session — persona, private Skills, pairing UI, work board, idle prompt-cache heartbeat, and taskboard.</p>
-              <div class="repo-pkgs">npm · fishball-core · fishball-amenities</div>
+              <p class="repo-desc">Turns one DSH session into the always-on assistant, with its own persona, private Skills, and pairing UI.</p>
+              <div class="repo-pkgs">npm · fishball-core · fishball-shared</div>
             </a>
 
-            <a class="repo-card" href="https://github.com/Arrosam/dsh-fishball-instance" target="_blank" rel="noopener">
+            <a class="repo-card" href="https://github.com/Arrosam/dsh-fishball/tree/main/dsh-fishball-instance" target="_blank" rel="noopener">
               <div class="repo-top">
                 <span class="repo-role mono">04 · Hosted bridge</span>
                 <svg class="repo-arr" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10 10 2M4 2h6v6"/></svg>
               </div>
               <h4 class="repo-name">dsh-fishball-instance</h4>
-              <p class="repo-desc">Runs Fishball inside an isolated child DSH under <code class="inl" style="color:var(--concrete);background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.14)">&lt;DSH_HOME&gt;/fishball/runtime</code>, syncs API-key model providers, provisions its token, and ships clean uninstall.</p>
+              <p class="repo-desc">Runs Fishball in an isolated child DSH, syncs API-key model providers, and provisions its connection token.</p>
               <div class="repo-pkgs">npm · dsh-instance</div>
+            </a>
+
+            <a class="repo-card" href="https://github.com/Arrosam/dsh-fishball/tree/main/amenities" target="_blank" rel="noopener">
+              <div class="repo-top">
+                <span class="repo-role mono">05 · Optional add-ons</span>
+                <svg class="repo-arr" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10 10 2M4 2h6v6"/></svg>
+              </div>
+              <h4 class="repo-name">amenities</h4>
+              <p class="repo-desc">Two bundles group optional add-ons for Fishball and the managed DSH — work board, cache heartbeat, taskboard, consultant, and Watchdog.</p>
+              <div class="repo-pkgs">npm · fishball-amenities · dsh-connector-amenities · fishball-board · fishball-heartbeat · fishball-taskboard · fishball-consultant · dsh-connector-watchdog</div>
             </a>
 
           </div>
@@ -1213,13 +1223,10 @@ section{ padding-block:clamp(3.5rem,9vh,7rem); }
       </div>
 
       <div class="actions">
-        <a class="btn solid" href="https://github.com/Arrosam/dsh-fishball-bundle" target="_blank" rel="noopener">
+        <a class="btn solid" href="https://github.com/Arrosam/dsh-fishball" target="_blank" rel="noopener">
           Install via bundle
           <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 10 10 2M4 2h6v6"/></svg>
         </a>
-        <a class="btn ghost" href="https://github.com/Arrosam/dsh-connector" target="_blank" rel="noopener">dsh-connector</a>
-        <a class="btn ghost" href="https://github.com/Arrosam/dsh-fishball" target="_blank" rel="noopener">dsh-fishball</a>
-        <a class="btn ghost" href="https://github.com/Arrosam/dsh-fishball-instance" target="_blank" rel="noopener">dsh-fishball-instance</a>
       </div>
     </article>
   </div>
